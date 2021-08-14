@@ -46,9 +46,12 @@ namespace CdCollection.Controllers
         }
 
         // GET: Cds/Create
+        //ViewData["ArtistId"] = new SelectList(_context.Artists.Include(Item => Item.Name), "Id", "Id");
+        // ViewData["ArtistId"] = new SelectList(_context.Artists, "Id", "Id");
+
         public IActionResult Create()
         {
-            ViewData["ArtistId"] = new SelectList(_context.Artists, "Id", "Id");
+            ViewData["ArtistId"] = new SelectList(_context.Artists, "Id", "Name");
             return View();
         }
 
@@ -65,7 +68,7 @@ namespace CdCollection.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["ArtistId"] = new SelectList(_context.Artists, "Id", "Id", cd.ArtistId);
+            ViewData["ArtistId"] = new SelectList(_context.Artists, "Id", "Name", cd.Name);
             return View(cd);
         }
 
@@ -82,7 +85,7 @@ namespace CdCollection.Controllers
             {
                 return NotFound();
             }
-            ViewData["ArtistId"] = new SelectList(_context.Artists, "Id", "Id", cd.ArtistId);
+            ViewData["ArtistId"] = new SelectList(_context.Artists, "Id", "Name", cd.Name);
             return View(cd);
         }
 
